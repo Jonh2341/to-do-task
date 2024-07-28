@@ -41,14 +41,16 @@ function TodoList() {
     }
   }
 
+  const count = task.length;
+
   return (
     <div className="todo-list">
       <TodoTitle text="To do list" />
-      {/* <div>count{}</div> */}
       <div className="EnterTask">
         <TodoText text={text} onTextChange={TextChange}/>
         <AddTaskButton onAddTask={AddTask} disabled={isDisabled()}/>
       </div>
+      <div>task count: {count}</div>
       {task.map((value, index) => {
         return (
           <TodoTask key={index} text={value}/>
