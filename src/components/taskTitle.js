@@ -1,8 +1,8 @@
 import "./Todo.css";
 
-function TaskTitle() {
+function TaskTitle({text}) {
     return (
-        <span className="task-title">Task #1</span>
+        <span className="task-title">{text}</span>
     );
 }   
 
