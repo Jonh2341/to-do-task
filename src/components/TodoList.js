@@ -44,9 +44,10 @@ function TodoList() {
 
   const count = task.length;
 
-  document.addEventListener("keyup", (event) => {
-    if (isDisabled && event.code === "Enter") AddTask();
-  });
+  // document.addEventListener("keyup", (event) => {
+  //   if (isDisabled && event.code === "Enter") return;
+  //   else if (event.code === "Enter") AddTask();
+  // });
 
   return (
     <div className="todo-list">
