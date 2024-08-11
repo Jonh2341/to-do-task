@@ -6,15 +6,17 @@ import { useState } from "react";
 import AddTaskButton from "./AddTaskButton";
 import EditTaskButton from "./EditTaskButton";
 import DeleteTaskButton from "./DeleteTaskButton";
+import CompleteTaskButton from "./CompleteTaskButton";
 import Add from "@mui/icons-material/Add";
 
-function TodoTask({ text }) {
+function TodoTask({ text, DeleteTask }) {
   return (
     <div className="task">
       <TaskTitle text={text} />
       <div className="box-button">
         <EditTaskButton />
-        <DeleteTaskButton />
+        <DeleteTaskButton onDeleteTask={DeleteTask}/>
+        <CompleteTaskButton/>
       </div>
     </div>
   );
@@ -34,6 +36,13 @@ function TodoList() {
     setText("");
   };
 
+  const DeleteTask = function (index) {
+    alert("Delete " + index)
+    setTask(
+      task.filter((value, key) => key != index)   
+    )
+  }
+ 
   const isDisabled = function () {
     if (text) {
       return false;
@@ -58,7 +67,9 @@ function TodoList() {
       </div>
       <div>task count: {count}</div>
       {task.map((value, index) => {
-        return <TodoTask key={index} text={value} />;
+        return <TodoTask key={index} text={value} DeleteTask={function () {
+          DeleteTask(index);
+        }}/>;
       })}
     </div>
   );

@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 
 function EditTaskButton() {
     return (
-        <Button variant="contained">Edit</Button>
+        <Button variant="contained" className="Font">Edit</Button>
     );
 }
 

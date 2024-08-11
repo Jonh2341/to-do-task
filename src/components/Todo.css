@@ -33,4 +33,5 @@
     border-radius: 10px;
 }
 
-.box-button{display: flex; width: 40%; justify-content: space-between;}
+.box-button{display: flex;}
+.Font{font-size: 11px!important; box-sizing: border-box; margin-left: 5px!important;}
