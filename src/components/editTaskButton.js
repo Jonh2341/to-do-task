@@ -1,9 +1,9 @@
 import "./Todo.css";
 import { Button } from "@mui/material";
 
-function EditTaskButton() {
+function EditTaskButton({disabled}) {
     return (
-        <Button variant="contained" className="Font">Edit</Button>
+        <Button variant="contained" className="Font" disabled={disabled}>Edit</Button>
     );
 }
 

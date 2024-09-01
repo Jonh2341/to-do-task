@@ -3,17 +3,16 @@ import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 
-function CompleteTaskButton({ onCompleteTask }) {
+function UncompleteTaskButton({ onUncompleteTask }) {
   return (
     <Button
       variant="contained"
-      color="success"
       className="Font"
-      onClick={onCompleteTask}
+      onClick={onUncompleteTask}
     >
-      Complete
+      Uncomplete
     </Button>
   );
 }
 
-export default CompleteTaskButton;
+export default UncompleteTaskButton;

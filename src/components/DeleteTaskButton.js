@@ -1,13 +1,13 @@
 import "./Todo.css";
 import { Button } from "@mui/material";
 
-function DeleteTaskButton({onDeleteTask}) {
+function DeleteTaskButton({onDeleteTask, disabled}) {
     const onDeleteTaskHandle = function () {
         onDeleteTask && onDeleteTask();
     }
 
     return (
-        <Button variant="contained" className="Font" onClick={onDeleteTaskHandle}>Delete</Button>
+        <Button variant="contained" className="Font" onClick={onDeleteTaskHandle} disabled={disabled}>Delete</Button>
     );
 }
 
