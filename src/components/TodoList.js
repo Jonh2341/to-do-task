@@ -9,9 +9,10 @@ import DeleteTaskButton from "./DeleteTaskButton";
 import CompleteTaskButton from "./CompleteTaskButton";
 import Add from "@mui/icons-material/Add";
 import UncompleteTaskButton from "./UncompleteTaskButton";
+import ConfirmTaskButton from "./ConfirmTaskButton";
 
 function TodoTask({ 
-
+  itemIndex,
   text, 
   color, 
   DeleteTask, 
@@ -19,16 +20,38 @@ function TodoTask({
   disabledDeleteTask, 
   disabledEditTask,
   isComplete,
+  editTask,
   uncompleteTask
 
 }) {
+
+  const [editText, setEditText] = useState(text);
+  const [isEdit, setIsEdit] = useState(false);
+
+  const EditChange = function (e) {
+    const value = e.target.value;
+    setEditText(value);
+  };
+
+  const handleEdit = function() {
+    setIsEdit(!isEdit);
+    isEdit && editTask();
+  }
+
+  const handleConfirm = function () {
+    setIsEdit(false);
+    editTask(editText, itemIndex);
+  }
+
   return (
     <div className="task" style={{background: color}}>
-      <TaskTitle text={text} />
+      {isEdit == false && <TaskTitle text={text} />}
+      {isEdit == true && <TodoText text={editText} onTextChange={EditChange} />}
       <div className="box-button">
-        <EditTaskButton disabled={disabledEditTask}/>
-        <DeleteTaskButton onDeleteTask={DeleteTask} disabled={disabledDeleteTask}/>
-        {isComplete == false && <CompleteTaskButton onCompleteTask={completeTask}/>}
+        {isEdit == false && <EditTaskButton disabled={disabledEditTask} onEditTask={handleEdit}/>}
+        {isEdit == true && <ConfirmTaskButton onConfirmTask={handleConfirm}/>}
+        {isEdit == false && <DeleteTaskButton onDeleteTask={DeleteTask} disabled={disabledDeleteTask}/>}
+        {isEdit == false && isComplete == false && <CompleteTaskButton onCompleteTask={completeTask}/>}
         {isComplete == true && <UncompleteTaskButton onUncompleteTask={uncompleteTask}/>}
       </div>
     </div>
@@ -59,14 +82,12 @@ function TodoList() {
   };
 
   const DeleteTask = function (index) {
-    alert("Delete " + index)
     setTask(
       task.filter((value, key) => key != index)   
     )
   }
 
   const CompleteTask = function (index) {
-    alert("Complete " + index)
     setCompleteTasks(
       function(prev) {
         console.log(prev)
@@ -77,7 +98,6 @@ function TodoList() {
   }
 
   const UncompleteTask = function (index) {
-    alert("Delete " + index)
     setCompleteTasks(
       completeTasks.filter((value, key) => value != index)   
     )
@@ -86,6 +106,19 @@ function TodoList() {
   const isDisabled = function () {
     return text ? false : true;
   };
+
+  const EditTask = function (text, index) {
+    console.log("edit ",text, index);
+
+    const newTasks = task.map((value, key) => {
+      if (key == index) {
+        return text;
+      }
+      return value;
+    });
+
+    setTask(newTasks);
+  }
 
   const count = task.length;
 
@@ -109,6 +142,7 @@ function TodoList() {
 
         return <TodoTask 
         key={index} 
+        itemIndex={index}
         text={value} 
         color={color}
         disabledDeleteTask={disabled}
@@ -127,6 +161,8 @@ function TodoList() {
           UncompleteTask(index);
         }}
         
+        editTask={EditTask}
+
         />;
       })}
     </div>
