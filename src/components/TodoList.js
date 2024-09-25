@@ -10,6 +10,7 @@ import CompleteTaskButton from "./CompleteTaskButton";
 import Add from "@mui/icons-material/Add";
 import UncompleteTaskButton from "./UncompleteTaskButton";
 import ConfirmTaskButton from "./ConfirmTaskButton";
+import ArrowBtnUp from "./ArrowBtnUp";
 
 function TodoTask({ 
   itemIndex,
@@ -33,6 +34,10 @@ function TodoTask({
     setEditText(value);
   };
 
+  const ArrowUp = function (e) {
+    alert("Up!");
+  }
+
   const handleEdit = function() {
     setIsEdit(!isEdit);
     isEdit && editTask();
@@ -45,6 +50,7 @@ function TodoTask({
 
   return (
     <div className="task" style={{background: color}}>
+      {isEdit == false && <ArrowBtnUp onBtnUp={ArrowUp}/>}
       {isEdit == false && <TaskTitle text={text} />}
       {isEdit == true && <TodoText text={editText} onTextChange={EditChange} />}
       <div className="box-button">
