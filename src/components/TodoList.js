@@ -12,6 +12,7 @@ import UncompleteTaskButton from "./UncompleteTaskButton";
 import ConfirmTaskButton from "./ConfirmTaskButton";
 import ArrowBtnUp from "./ArrowBtnUp";
 
+// todoTask - додавання задач
 function TodoTask({ 
   itemIndex,
   text, 
