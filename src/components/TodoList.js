@@ -11,8 +11,10 @@ import Add from "@mui/icons-material/Add";
 import UncompleteTaskButton from "./UncompleteTaskButton";
 import ConfirmTaskButton from "./ConfirmTaskButton";
 import ArrowBtnUp from "./ArrowBtnUp";
+import MoreButton from "./MoreButton";
+import ArrowBtnDown from "./ArrowBtnDown";
 
-// todoTask - додавання задач
+// todoTask - додавання
 function TodoTask({ 
   itemIndex,
   text, 
@@ -23,8 +25,9 @@ function TodoTask({
   disabledEditTask,
   isComplete,
   editTask,
-  uncompleteTask
-
+  uncompleteTask,
+  orderTaskUp, 
+  orderTaskDown,
 }) {
 
   const [editText, setEditText] = useState(text);
@@ -36,7 +39,13 @@ function TodoTask({
   };
 
   const ArrowUp = function (e) {
-    alert("Up!");
+    // alert("Down!" + itemIndex + " Next " + (itemIndex - 1));
+    orderTaskUp(itemIndex);
+  }
+
+  const ArrowDown = function (e) {
+    // alert("Down!" + itemIndex + " Next " + (itemIndex + 1));
+    orderTaskDown(itemIndex);
   }
 
   const handleEdit = function() {
@@ -51,17 +60,21 @@ function TodoTask({
 
   return (
     <div className="task" style={{background: color}}>
-      {isEdit == false && <ArrowBtnUp onBtnUp={ArrowUp}/>}
+      {isEdit == false && <ArrowBtnUp onClick={ArrowUp}/>}
+      {isEdit == false && <ArrowBtnDown onClick={ArrowDown}/>}
       {isEdit == false && <TaskTitle text={text} />}
       {isEdit == true && <TodoText text={editText} onTextChange={EditChange} />}
-      <div className="box-button">
-        {isEdit == false && <EditTaskButton disabled={disabledEditTask} onEditTask={handleEdit}/>}
-        {isEdit == true && <ConfirmTaskButton onConfirmTask={handleConfirm}/>}
-        {isEdit == false && <DeleteTaskButton onDeleteTask={DeleteTask} disabled={disabledDeleteTask}/>}
-        {isEdit == false && isComplete == false && <CompleteTaskButton onCompleteTask={completeTask}/>}
-        {isComplete == true && <UncompleteTaskButton onUncompleteTask={uncompleteTask}/>}
-      </div>
+      <MoreButton items={
+        <div className="box-button">
+          {isEdit == false && <EditTaskButton disabled={disabledEditTask} onEditTask={handleEdit}/>}
+          {isEdit == true && <ConfirmTaskButton onConfirmTask={handleConfirm}/>}
+          {isEdit == false && <DeleteTaskButton onDeleteTask={DeleteTask} disabled={disabledDeleteTask}/>}
+          {isEdit == false && isComplete == false && <CompleteTaskButton onCompleteTask={completeTask}/>}
+          {isComplete == true && <UncompleteTaskButton onUncompleteTask={uncompleteTask}/>}
+        </div>
+        }/>
     </div>
+    
   );
 }
 
@@ -127,6 +140,22 @@ function TodoList() {
     setTask(newTasks);
   }
 
+  const OrderTaskUp = function (index) {
+    const current = task[index];
+
+    const tmpTask = task.filter((item, i) => i != index);
+
+    console.log(current, tmpTask);
+  }
+
+  const OrderTaskDown = function (index) {
+    const current = task[index];
+    
+    const tmpTask = task.filter((item, i) => i != index);
+    
+    console.log(current, tmpTask);
+  }
+
   const count = task.length;
 
   // document.addEventListener("keyup", (event) => {
@@ -170,6 +199,9 @@ function TodoList() {
         
         editTask={EditTask}
 
+        orderTaskUp={OrderTaskUp}
+
+        orderTaskDown={OrderTaskDown}
         />;
       })}
     </div>

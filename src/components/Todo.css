@@ -31,7 +31,12 @@
     padding: 30px;
     background-color: #C9C9C9;
     border-radius: 10px;
+    gap: 5px;
 }
 
-.box-button{display: flex;}
+.task-title{
+    width: 80%;
+}
+
+.box-button{display: flex; flex-direction: column; gap: 5px;}
 .Font{font-size: 11px!important; box-sizing: border-box; margin-left: 5px!important;}

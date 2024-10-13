@@ -1,9 +1,10 @@
+import { ArrowUpOutlined } from "@ant-design/icons";
 import "./Todo.css";
-import { Button } from "@mui/material";
+import { Button } from "antd";
 
-function ArrowBtnUp({disabled, onBtnUp}) {
+function ArrowBtnUp({onClick}) {
     return (
-        <Button variant="contained" className="Font"a onClick={onBtnUp} disabled={disabled}>^</Button>
+        <Button icon={<ArrowUpOutlined />} onClick={onClick} size="small"/>
     );
 }
 
