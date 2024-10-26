@@ -13,6 +13,7 @@ import ConfirmTaskButton from "./ConfirmTaskButton";
 import ArrowBtnUp from "./ArrowBtnUp";
 import MoreButton from "./MoreButton";
 import ArrowBtnDown from "./ArrowBtnDown";
+import { Input } from 'antd';
 
 // todoTask - додавання
 function TodoTask({ 

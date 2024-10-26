@@ -1,9 +1,9 @@
+// import AddTaskBtn from "./AddTaskButton";
 import { TextField } from "@mui/material";
-import AddTaskBtn from "./AddTaskButton";
 
 function TodoText({text, onTextChange}) {
     return (
-      <TextField 
+      <TextField
         variant="outlined" 
         sx={{width: "80%"}} 
         placeholder="Enter task"
